@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Seminar Registration 2026</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        :root {
+            --primary: #00f2fe;
+            --secondary: #4facfe;
+            --accent: #7000ff;
+            --warning: #ff4b2b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+
+        body {
+            background: linear-gradient(rgba(3, 0, 30, 0.85), rgba(3, 0, 30, 0.85)), 
+                        url('https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1600');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: white;
+            padding: 40px 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 650px; /* Slightly wider to accommodate grid */
+            background: rgba(15, 15, 35, 0.7);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+        }
+
+        .progress-bar-wrap {
+            width: 100%; height: 6px; background: rgba(255,255,255,0.1);
+            border-radius: 10px; margin-bottom: 30px; overflow: hidden;
+        }
+
+        #progress-fill {
+            width: 0%; height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: 0.5s ease;
+        }
+
+        h1 { font-size: 2rem; text-align: center; margin-bottom: 5px; text-shadow: 0 0 15px var(--primary); }
+        .subtitle { text-align: center; color: #aaa; font-size: 0.85rem; margin-bottom: 30px; }
+
+        /* Grid System for compact layout */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group { margin-bottom: 20px; }
+        .full-width { grid-column: span 2; }
+
+        label { color: var(--primary); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.2px; display: block; margin-bottom: 8px; font-weight: 600; }
+        
+        input, select, textarea {
+            width: 100%; padding: 12px 15px; background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.15); border-radius: 10px;
+            color: white; outline: none; transition: 0.3s; font-size: 0.9rem;
+        }
+
+        textarea { resize: none; height: 80px; }
+
+        input:focus, select:focus, textarea:focus { 
+            border-color: var(--primary); 
+            background: rgba(255,255,255,0.1);
+            box-shadow: 0 0 12px rgba(0, 242, 254, 0.2);
+        }
+
+        .checkbox-container { display: flex; align-items: flex-start; gap: 10px; margin: 10px 0 25px 0; cursor: pointer; }
+
+        button {
+            width: 100%; padding: 16px; border: none; border-radius: 12px;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            color: white; font-weight: bold; cursor: pointer; transition: 0.3s;
+            text-transform: uppercase; letter-spacing: 2px;
+        }
+
+        button:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0, 210, 255, 0.3); }
+
+        #success-view { display: none; text-align: center; padding: 40px 0; }
+
+        @media (max-width: 600px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .full-width { grid-column: span 1; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="form-view">
+        <div class="progress-bar-wrap"><div id="progress-fill"></div></div>
+        <h1>AI SEMINAR 2026</h1>
+        <p class="subtitle">Complete your technical profile to register</p>
+
+        <form id="aiForm">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="name" placeholder="John Doe" required oninput="trackProgress()">
+                </div>
+                <div class="form-group">
+                    <label>Mobile Number</label>
+                    <input type="tel" id="mobile" placeholder="+1 234 567 890" required oninput="trackProgress()">
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="email" placeholder="john@example.com" required oninput="trackProgress()">
+                </div>
+                <div class="form-group">
+                    <label>College Roll No</label>
+                    <input type="text" id="rollno" placeholder="e.g. CS2024-042" required oninput="trackProgress()">
+                </div>
+
+                <div class="form-group full-width">
+                    <label>College / University Name</label>
+                    <input type="text" id="college" placeholder="Enter Institution Name" required oninput="trackProgress()">
+                </div>
+
+                <div class="form-group">
+                    <label>Seminar Topic</label>
+                    <select id="topic" required oninput="trackProgress()">
+                        <option value="" disabled selected>Select Track</option>
+                        <option>Generative AI</option>
+                        <option>Machine Learning</option>
+                        <option>AI Ethics</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <select id="payment" required oninput="trackProgress()">
+                        <option value="upi">UPI / Wallet</option>
+                        <option value="card">Card Payment</option>
+                        <option value="spot">On-Spot</option>
+                    </select>
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Full Residential Address</label>
+                    <textarea id="address" placeholder="Street, City, State, Zip Code" required oninput="trackProgress()"></textarea>
+                </div>
+            </div>
+
+            <div class="checkbox-container">
+                <input type="checkbox" id="terms" required oninput="trackProgress()">
+                <span style="font-size: 0.75rem; color: #bbb;">I agree to the terms of the AI Seminar and confirm all details are accurate.</span>
+            </div>
+
+            <button type="submit" id="submitBtn">Generate Access Pass</button>
+        </form>
+    </div>
+
+    <div id="success-view">
+        <div style="font-size: 70px; margin-bottom: 20px;">✅</div>
+        <h1 style="color: var(--primary);">REGISTRATION SYNCED</h1>
+        <p style="margin: 20px 0; color: #fff;">Profile created for <strong id="user-display"></strong></p>
+        <p style="color: #888; font-size: 0.85rem;">A confirmation text has been sent to your mobile number.</p>
+        <button onclick="location.reload()" style="margin-top: 30px; background: rgba(255,255,255,0.05); border: 1px solid var(--primary);">Register Another</button>
+    </div>
+</div>
+
+<script>
+    function trackProgress() {
+        const fields = ['name', 'mobile', 'email', 'rollno', 'college', 'topic', 'payment', 'address'];
+        let score = 0;
+        fields.forEach(id => {
+            if(document.getElementById(id).value.trim() !== "") score++;
+        });
+        if(document.getElementById('terms').checked) score++;
+        
+        const progress = (score / 9) * 100;
+        document.getElementById('progress-fill').style.width = progress + "%";
+    }
+
+    document.getElementById('aiForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn = document.getElementById('submitBtn');
+        btn.innerText = "PROCESSING...";
+        
+        confetti({
+            particleCount: 150,
+            spread: 70,
+            origin: { y: 0.6 },
+            colors: ['#00f2fe', '#4facfe', '#7000ff']
+        });
+
+        setTimeout(() => {
+            document.getElementById('form-view').style.display = 'none';
+            document.getElementById('success-view').style.display = 'block';
+            document.getElementById('user-display').innerText = document.getElementById('name').value;
+        }, 1500);
+    });
+</script>
+
+</body>
+</html>
