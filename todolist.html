@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlowState To-Do</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            min-height: 100vh;
+            color: white;
+            font-family: 'Inter', sans-serif;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+        }
+        .task-card:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+        }
+        .glow-urgent {
+            box-shadow: 0 0 15px rgba(244, 63, 94, 0.3);
+            border: 1px solid rgba(244, 63, 94, 0.4);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center p-6">
+
+    <div class="max-w-md w-full space-y-8">
+        <header class="flex justify-between items-end">
+            <div>
+                <h1 class="text-3xl font-bold tracking-tight">Today</h1>
+                <p class="text-slate-400">Saturday, March 28</p>
+            </div>
+            <div class="text-right">
+                <span class="text-2xl font-mono font-bold text-indigo-400">82%</span>
+                <p class="text-xs uppercase tracking-widest text-slate-500">Done</p>
+            </div>
+        </header>
+
+        <div class="glass p-6 glow-urgent relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-3">
+                <span class="text-[10px] bg-rose-500/20 text-rose-400 px-2 py-1 rounded-full font-bold uppercase">High Priority</span>
+            </div>
+            <p class="text-sm text-indigo-300 font-medium mb-1">Current Focus</p>
+            <h2 class="text-xl font-semibold mb-4">Finalize Q3 Budget Strategy</h2>
+            <div class="flex gap-3">
+                <button class="flex-1 bg-indigo-600 hover:bg-indigo-500 py-2 rounded-xl font-medium transition">Complete</button>
+                <button class="px-4 bg-white/10 hover:bg-white/20 rounded-xl transition">⋯</button>
+            </div>
+        </div>
+
+        <section class="space-y-3">
+            <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wider ml-2">Up Next</h3>
+            
+            <div class="glass task-card p-4 flex items-center justify-between group cursor-pointer">
+                <div class="flex items-center gap-4">
+                    <div class="w-6 h-6 border-2 border-indigo-500 rounded-full group-hover:bg-indigo-500/20 transition"></div>
+                    <span class="text-slate-200">Review marketing assets</span>
+                </div>
+                <span class="text-xs text-slate-500">14:00</span>
+            </div>
+
+            <div class="glass task-card p-4 flex items-center justify-between group cursor-pointer">
+                <div class="flex items-center gap-4">
+                    <div class="w-6 h-6 border-2 border-slate-600 rounded-full group-hover:bg-indigo-500/20 transition"></div>
+                    <span class="text-slate-200">Call technical support</span>
+                </div>
+                <span class="text-xs text-slate-500">5m</span>
+            </div>
+        </section>
+
+        <div class="fixed bottom-10 left-1/2 -translate-x-1/2 w-full max-w-xs">
+            <div class="glass p-2 flex items-center shadow-2xl">
+                <input type="text" placeholder="Add a task..." class="bg-transparent flex-1 pl-4 outline-none text-sm">
+                <button class="w-10 h-10 bg-white text-black rounded-xl font-bold text-xl hover:scale-95 transition">+</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
