@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Knowledge Quiz</title>
+    <style>
+        :root {
+            --primary-color: #4A90E2;
+            --success-color: #2ECC71;
+            --error-color: #E74C3C;
+            --bg-color: #f4f7f6;
+            --text-color: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .quiz-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 600px;
+            padding: 2rem;
+            overflow: hidden;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--primary-color);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .question-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .question-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .options-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .option-item {
+            background-color: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .option-item:hover:not(.disabled) {
+            border-color: var(--primary-color);
+            background-color: #eef5ff;
+        }
+
+        /* Styles for correct/incorrect states */
+        .option-item.correct {
+            background-color: rgba(46, 204, 113, 0.1);
+            border-color: var(--success-color);
+            color: var(--success-color);
+        }
+
+        .option-item.incorrect {
+            background-color: rgba(231, 76, 60, 0.1);
+            border-color: var(--error-color);
+            color: var(--error-color);
+        }
+
+        .option-item.disabled {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            width: 100%;
+            transition: background 0.2s;
+            display: none; /* Hidden by default */
+        }
+
+        .btn:hover {
+            background-color: #357abd;
+        }
+
+        .result-section {
+            text-align: center;
+            display: none;
+        }
+
+        .score-display {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <div class="header">
+        <h2>General Knowledge Quiz</h2>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress"></div>
+        </div>
+    </div>
+
+    <div id="quiz-area">
+        <div class="question-section">
+            <h3 class="question-text" id="question">Question goes here?</h3>
+            <ul class="options-list" id="options">
+                </ul>
+        </div>
+        <button class="btn" id="next-btn">Next Question</button>
+    </div>
+
+    <div id="result-area" class="result-section">
+        <h2>Quiz Completed!</h2>
+        <p>Your final score is:</p>
+        <div class="score-display">
+            <span id="score">0</span> / 5
+        </div>
+        <p id="feedback-msg"></p>
+        <button class="btn" style="display:block;" onclick="location.reload()">Restart Quiz</button>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        {
+            question: "What is the capital of France?",
+            options: ["Berlin", "Madrid", "Paris", "Rome"],
+            correct: 2 // Index of correct answer (0-3)
+        },
+        {
+            question: "Which planet is known as the Red Planet?",
+            options: ["Earth", "Mars", "Jupiter", "Venus"],
+            correct: 1
+        },
+        {
+            question: "What is 2 + 2 x 3?",
+            options: ["6", "8", "12", "10"],
+            correct: 1 // Order of operations: 2 + (2x3) = 8
+        },
+        {
+            question: "Who wrote 'Romeo and Juliet'?",
+            options: ["Charles Dickens", "William Shakespeare", "Mark Twain", "Jane Austen"],
+            correct: 1
+        },
+        {
+            question: "Which element has the chemical symbol 'O'?",
+            options: ["Gold", "Oxygen", "Osmium", "Olive"],
+            correct: 1
+        }
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+
+    const questionEl = document.getElementById('question');
+    const optionsEl = document.getElementById('options');
+    const nextBtn = document.getElementById('next-btn');
+    const progressEl = document.getElementById('progress');
+    const quizArea = document.getElementById('quiz-area');
+    const resultArea = document.getElementById('result-area');
+    const scoreEl = document.getElementById('score');
+    const feedbackMsg = document.getElementById('feedback-msg');
+
+    function loadQuestion() {
+        const currentData = questions[currentQuestionIndex];
+        
+        // Update Progress Bar
+        const progressPercent = ((currentQuestionIndex) / questions.length) * 100;
+        progressEl.style.width = `${progressPercent}%`;
+
+        // Set Question Text
+        questionEl.textContent = `${currentQuestionIndex + 1}. ${currentData.question}`;
+
+        // Clear previous options
+        optionsEl.innerHTML = '';
+        nextBtn.style.display = 'none';
+
+        // Generate Options
+        currentData.options.forEach((opt, index) => {
+            const li = document.createElement('li');
+            li.classList.add('option-item');
+            li.textContent = opt;
+            li.onclick = () => selectOption(index, li);
+            optionsEl.appendChild(li);
+        });
+    }
+
+    function selectOption(selectedIndex, selectedLi) {
+        const currentData = questions[currentQuestionIndex];
+        const allOptions = document.querySelectorAll('.option-item');
+
+        // Disable all options so user can't pick again
+        allOptions.forEach(li => li.classList.add('disabled'));
+
+        // Check Answer
+        if (selectedIndex === currentData.correct) {
+            selectedLi.classList.add('correct');
+            score++;
+        } else {
+            selectedLi.classList.add('incorrect');
+            // Highlight the correct answer automatically
+            allOptions[currentData.correct].classList.add('correct');
+        }
+
+        // Show Next Button
+        nextBtn.style.display = 'block';
+    }
+
+    nextBtn.addEventListener('click', () => {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+            loadQuestion();
+        } else {
+            showResults();
+        }
+    });
+
+    function showResults() {
+        quizArea.style.display = 'none';
+        resultArea.style.display = 'block';
+        scoreEl.textContent = score;
+        progressEl.style.width = '100%';
+
+        if(score === 5) feedbackMsg.textContent = "Perfect Score! You are a genius! 🌟";
+        else if(score >= 3) feedbackMsg.textContent = "Great job! You know your stuff. 👍";
+        else feedbackMsg.textContent = "Keep practicing! You'll get it next time. 💪";
+    }
+
+    // Initialize Quiz
+    loadQuestion();
+</script>
+
+</body>
+</html>
