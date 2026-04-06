@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angel Dhabarde | Portfolio</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.8); /* Semi-transparent for blur effect */
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent: #38bdf8;
+        }
+
+        /* --- Animated Background --- */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            margin: 0;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Blobs */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            background: radial-gradient(circle at 50% 50%, #1e293b 0%, #0f172a 100%);
+        }
+
+        .blob {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+            border-radius: 50%;
+            filter: blur(40px);
+            animation: move 20s infinite alternate;
+        }
+
+        .blob:nth-child(2) {
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+            width: 600px;
+            height: 600px;
+            animation-duration: 25s;
+            animation-delay: -5s;
+        }
+
+        @keyframes move {
+            from { transform: translate(-10%, -10%); }
+            to { transform: translate(60%, 40%); }
+        }
+
+        /* --- Layout --- */
+        header {
+            text-align: center;
+            padding: 6rem 2rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 16px;
+            backdrop-filter: blur(10px); /* Glassmorphism effect */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .tag {
+            background: rgba(14, 165, 233, 0.2);
+            color: var(--accent);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            border: 1px solid var(--accent);
+        }
+
+        .contact-section {
+            margin-top: 5rem;
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-animation">
+        <div class="blob"></div>
+        <div class="blob"></div>
+    </div>
+
+    <header>
+        <h1 style="font-size: 3rem; margin-bottom: 0.5rem;">Angel Dhabarde</h1>
+        <p style="color: var(--accent); font-weight: bold; letter-spacing: 1px;">SIT NAGPUR | COMPUTER HARDWARE & IOT</p>
+    </header>
+
+    <div class="container">
+        <section id="projects">
+            <h2 style="margin-bottom: 2rem;">Projects</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <h3>Nanotech IoT Sensors</h3>
+                    <p>Exploring the integration of nano-sensors with IoT devices for advanced data collection.</p>
+                    <span class="tag">Hardware</span> <span class="tag">IoT</span>
+                </div>
+                <div class="project-card">
+                    <h3>Automated Attendance</h3>
+                    <p>A smart tracking system designed to maintain 75% attendance compliance.</p>
+                    <span class="tag">Python</span> <span class="tag">Automation</span>
+                </div>
+                <div class="project-card">
+                    <h3>Generative Robot Art</h3>
+                    <p>Visualizing future robotics through custom figurines and conceptual designs.</p>
+                    <span class="tag">Design</span> <span class="tag">AI</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-section">
+            <h2>Get In Touch</h2>
+            <p><strong>College:</strong> Symbiosis Institute of Technology, Nagpur</p>
+            <p><strong>Email:</strong> angel.dhabarde@sitnagpur.edu.in</p>
+            <p style="margin-top: 2rem;">
+                <a href="#" style="color: var(--accent); text-decoration: none; border: 1px solid var(--accent); padding: 0.8rem 2rem; border-radius: 30px;">View LinkedIn</a>
+            </p>
+        </section>
+    </div>
+
+    <footer>
+        &copy; 2026 Angel Dhabarde. All rights reserved.
+    </footer>
+
+</body>
+</html>
