@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saffron & Spice | Authentic Indian Cuisine</title>
+    <style>
+        :root {
+            --primary: #800000; /* Deep Maroon */
+            --accent: #d4af37;  /* Gold */
+            --bg: #fffbf0;      /* Cream */
+            --text: #2c2c2c;
+        }
+
+        body {
+            font-family: 'Garamond', 'Times New Roman', serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            border-top: 10px solid var(--accent);
+        }
+
+        header {
+            text-align: center;
+            padding: 4rem 1rem;
+            background-color: var(--primary);
+            color: var(--accent);
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            margin: 0;
+            letter-spacing: 3px;
+            font-weight: normal;
+            text-transform: uppercase;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            margin-top: 10px;
+            font-style: italic;
+            color: #fff;
+        }
+
+        /* Decorative Pattern Divider */
+        .divider {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--accent);
+            margin: 1rem 0;
+            opacity: 0.8;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            margin-top: -30px; /* Overlap effect */
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .category-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-top: 2rem;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+            padding-bottom: 5px;
+            width: 100%;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin: 1.8rem 0;
+        }
+
+        .item-info {
+            flex: 1;
+            padding-right: 1rem;
+        }
+
+        .item-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #4a4a4a;
+            margin: 0;
+        }
+
+        .item-description {
+            font-style: italic;
+            font-size: 0.95rem;
+            color: #777;
+            margin: 0.3rem 0;
+        }
+
+        .price {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.2rem;
+            min-width: 60px;
+            text-align: right;
+        }
+
+        /* Dotted line connector */
+        .dotted-line {
+            flex: 1;
+            border-bottom: 2px dotted #ccc;
+            margin: 0 15px;
+            position: relative;
+            top: -5px;
+        }
+
+        /* Veg/Non-Veg Icons */
+        .veg-icon::before {
+            content: "🟢";
+            font-size: 0.8rem;
+            margin-right: 5px;
+        }
+
+        .non-veg-icon::before {
+            content: "🔴";
+            font-size: 0.8rem;
+            margin-right: 5px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem;
+            background: var(--primary);
+            color: var(--accent);
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 2.5rem; }
+            .menu-item { flex-direction: column; text-align: center; }
+            .dotted-line { display: none; }
+            .price { margin-top: 0.5rem; width: 100%; text-align: center; }
+            .container { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Saffron & Spice</h1>
+    <p>Royal Flavors of India</p>
+    <div class="divider">❖ ❖ ❖</div>
+</header>
+
+<div class="container">
+    
+    <h2 class="category-title">Shuruwaat (Starters)</h2>
+    
+    <div class="menu-item">
+        <div class="item-info">
+            <p class="item-name veg-icon">Paneer Tikka</p>
+            <p class="item-description">Cottage cheese marinated in spiced yogurt and grilled in a clay oven.</p>
+        </div>
+        <div class="dotted-line"></div>
+        <div class="price">₹320</div>
+    </div>
+
+    <div class="menu-item">
+        <div class="item-info">
+            <p class="item-name non-veg-icon">Chicken Seekh Kebab</p>
+            <p class="item-description">Minced chicken seasoned with coriander, ginger, and garlic.</p>
+        </div>
+        <div class="dotted-line"></div>
+        <div class="price">₹380</div>
+    </div>
+
+    <div class="menu-item">
+        <div class="item-info">
+            <p class="item-name veg-icon">Hara Bhara Kebab</p>
+            <p class="item-description">Spinach and green pea patties stuffed with nuts.</p>
+        </div>
+        <div class="dotted-line"></div>
+        <div class="price">₹290</div>
+    </div>
+
+    <h2 class="category-title">Mukhya Bhoj (Mains)</h2>
+
+    <div class="menu-item">
+        <div class="item-info">
+            <p class="item-name non-veg-icon">Butter Chicken</p>
+            <p class="item-description">Tandoori chicken simmered in a rich, creamy tomato gravy.</p>
+        </div>
+        <div class="dotted-line"></div>
+        <div class="price">₹450</div>
+    </div>
+
+    <div class="menu-item">
+        <div class="item-info">
+            <p class="item-name veg-icon">Dal Makhani</p>
+            <p class="item-description">Black lentils slow-cooked overnight with butter and cream.</p>
+        </div>
+        <div class="dotted-line"></div>
+        <div class="price">₹350</div>
+    </div>
+
+    <div class="menu-item">
+        <div class="item-info">
+            <p class="item-name non-veg-icon">Mutton Rogan Josh</p>
+            <p class="item-description">Kashmiri style lamb curry with aromatic spices.</p>
+        </div>
+        <div class="dotted-line"></div>
+        <div class="price">₹520</div>
+    </div>
+
+    <h2 class="category-title">Breads & Rice</h2>
+
+    <div class="menu-item">
+        <div class="item-info">
+            <p class="item-name veg-icon">Garlic Naan</p>
+        </div>
+        <div class="dotted-line"></div>
+        <div class="price">₹60</div>
+    </div>
+
+    <div class="menu-item">
+        <div class="item-info">
+            <p class="item-name non-veg-icon">Chicken Biryani</p>
+            <p class="item-description">Basmati rice cooked with marinated chicken and saffron.</p>
+        </div>
+        <div class="dotted-line"></div>
+        <div class="price">₹400</div>
+    </div>
+
+    <h2 class="category-title">Pey (Drinks)</h2>
+
+    <div class="menu-item">
+        <div class="item-info">
+            <p class="item-name veg-icon">Mango Lassi</p>
+            <p class="item-description">Chilled yogurt drink blended with sweet mango pulp.</p>
+        </div>
+        <div class="dotted-line"></div>
+        <div class="price">₹120</div>
+    </div>
+
+</div>
+
+<footer>
+    <h3>Saffron & Spice</h3>
+    <p>Open Daily: 12:00 PM - 11:00 PM</p>
+    <p>MG Road, Nagpur, Maharashtra</p>
+</footer>
+
+</body>
+</html>
